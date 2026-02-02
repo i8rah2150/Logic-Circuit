@@ -14,26 +14,21 @@ def and_gate(X, Y):
 #---User_Circuits---
 user_gate = str(input("Enter your desired gate: "))
 if user_gate.upper() == 'NOT' :
-    print(
+    print(input_C,
         """
 ────|NOT>o────
 """
+(int(not_gate(input_C)))
     )
 elif user_gate.upper() == 'OR' :
-    print(
-        """   
-────{OR>────   
-"""
-    )
+    print(input_A,"""────{ )
+      {OR>────""",or_gate(input_A, input_B))
+    print(input_B,"────{ )")
 elif user_gate.upper() == 'AND' :
-    print(
-        """
-────|AND)────
-"""
-    )
+    print(input_A,"""────| )
+      |AND)────""",and_gate(input_A, input_B))
+    print(input_B,"────| )")
 else:
     print("Invalid Gate input")
 #-------------
-print(int(not_gate(input_C)))
-print(or_gate(input_A, input_B))
-print(and_gate(input_A, input_B))
+
