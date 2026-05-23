@@ -1,104 +1,106 @@
+import gates
 #-------------
 print("Logic Circuit")
-
-#---Defining_Functions---
-def not_gate(text):
-    return not text
-def or_gate(A, B):
-    return A or B
-def and_gate(X, Y):
-    return X and Y
-def nand_gate(C, D):
-    in1 = C and D
-    return int(not in1) 
-def nor_gate(N, M):
-    in2 = N or M
-    return int(not in2)
-def xor_gate(J, K):
-    ins1 = not J 
-    ins2 = not K
-    ins3 = ins1 and K
-    ins4 = ins2 and J
-    return ins3 or ins4
 #-------------
 
 #---Taking_Input---
 input_X = str(input("Do you want to invert any input? (yes/no): "))
 if input_X.lower() == "yes":
     input_Y = int(input("Enter the input you want to invert (0/1): "))
-    input_Y = not_gate(input_Y)
-    print(f"Inverted Input: {int(input_Y)}")
+    #---Not_Gate---
+    NOT_GATE = f"""
+    {input_Y}────|NOT>o───{int(gates.not_gate(input_Y))}
+    """
+#---
 else:
     input_A = int(input("Enter your First input into the circuit: "))
     input_B = int(input("Enter your Second input into the circuit: "))
+    #---Logic_Gate---
+    #---Or_Gate---
+    OR_GATE = f"""
+    {input_A}●──┐
+        ├{{OR)───{gates.or_gate(input_A, input_B)}
+    {input_B}●──┘
+    """
+    #---
+
+    #---And_Gate---
+    AND_GATE = f"""
+    {input_A}●──┐
+        ├|AND)───{gates.and_gate(input_A, input_B)}
+    {input_B}●──┘
+    """
+    #---
+
+    #---Nor_Gate---
+    NOR_GATE = f"""
+    {input_A}●──┐
+        ├{{NOR)o───{gates.nor_gate(input_A, input_B)}
+    {input_B}●──┘
+    """
+    #---
+
+    #---Nand_Gate---
+    NAND_GATE = f"""
+    {input_A}●──┐
+        ├|NAND)o───{gates.nand_gate(input_A, input_B)}
+    {input_B}●──┘
+    """
+    #---
+
+    #---Xor_Gate---
+    XOR_GATE = f"""
+    {input_A}●──┐
+        ├{{XOR)───{gates.xor_gate(input_A, input_B)}
+    {input_B}●──┘
+    """
+    #---
 
 #-------------
 
-#---Logic_Gate---
-#---Not_Gate---
-NOT_GATE = f"""
-{input_A}────|NOT>o───▶{input_B}
-"""
-#---
 
-#---Or_Gate---
-OR_GATE = f"""
-{input_A}●──┐
-            ├{{OR)───▶
-{input_B}●──┘
+#---Output_arrow *in_working*---
+OUTPUT_ARROW = """
+───▶{undefined}
 """
-#---
-
-#---And_Gate---
-AND_GATE = f"""
-{input_A}●──┐
-            ├|AND)───▶
-{input_B}●──┘
-"""
-#---
-
-#---Nor_Gate---
-NOR_GATE = f"""
-{input_A}●──┐
-            ├{{NOR)o───▶
-{input_B}●──┘
-"""
-#---
-
-#---Nand_Gate---
-NAND_GATE = f"""
-{input_A}●──┐
-            ├|NAND)o───▶
-{input_B}●──┘
-"""
-#---
-#---Xor_Gate---
-XOR_GATE = f"""
-{input_A}●──┐
-            ├{{XOR)───▶
-{input_B}●──┘
-"""
-#---
 #----------------
+set_func = []
 #---User_Circuits---
-print(
-    """
-Available Gates
-● NOT
-● OR
-● AND
-● NOR
-● NAND
-● XOR
-"""
-)
-while True:
-    user_gate = str(input("Enter your desired gate(s) [or enter 'done' to exit]: "))
-    if user_gate.lower() == "done":
-        break
-    if user_gate.lower():
-        print()
 
+
+if input_X.lower() == "yes":
+    print(NOT_GATE)
+else:
+    print(
+    """
+    Available Gates:-
+    ● OR
+    ● AND
+    ● NOR
+    ● NAND
+    ● XOR
+    """
+    )
+    while True:
+        user_gate = str(input("Enter your desired gate(s) [or enter 'done' to exit]: "))
+        if user_gate.lower() == "done":
+            break
+        if user_gate.lower() == "or":
+            print(OR_GATE)
+        elif user_gate.lower() == "and":
+            print(AND_GATE)
+        elif user_gate.lower() == "nor":    
+            print(NOR_GATE)
+        elif user_gate.lower() == "nand":    
+            print(NAND_GATE)
+        elif user_gate.lower() == "xor":    
+            print(XOR_GATE)
+    while True:
+        user_oput = input("Do your want to build a circuit using the above gates? (yes/no): ")
+        if user_oput.lower() == "yes":
+            set_func.append(str(input("Enter the output of the gate you want to use: ")))
+        else:
+            break
 #-------------
 
 #---Logic_Gate---
